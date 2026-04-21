@@ -158,7 +158,8 @@ export function printMatrix(matrix: Float32Array[]) {
 
 export async function parseJson(jsonText: string, useJson5 = false) {
 	if (useJson5) {
-		const JSON5 = await import('json5')
+		const json5Module: any = await import('json5')
+		const JSON5 = json5Module.default ?? json5Module
 
 		return JSON5.parse(jsonText)
 	} else {
@@ -170,7 +171,8 @@ export async function stringifyAndFormatJson(obj: any, useJson5 = false) {
 	let textContent: string
 
 	if (useJson5) {
-		const JSON5 = await import('json5')
+		const json5Module: any = await import('json5')
+		const JSON5 = json5Module.default ?? json5Module
 
 		textContent = JSON5.stringify(obj, undefined, 4)
 	} else {
